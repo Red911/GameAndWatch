@@ -10,6 +10,7 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private PlayerNode _baseNode;
     [SerializeField] private float _opacityActive = 1f;
     [SerializeField] private float _opacityDisable = .3f;
+    [SerializeField] private bool _useImage;
 
     private PlayerNode m_currentNode;
 
@@ -27,19 +28,38 @@ public class PlayerMovementController : MonoBehaviour
             PlayerNode wantedNode = m_currentNode.GetPlayerNodeWithMovement(movement);
             if (wantedNode != null)
             {
-                Image tempImage = m_currentNode.GetComponent<Image>();
-                var tempColor = tempImage.color;
-                tempColor.a = _opacityDisable;
-                tempImage.color = tempColor;
-
-                tempImage = wantedNode.GetComponent<Image>();
-                tempColor = tempImage.color;
-                tempColor.a = _opacityActive;
-                tempImage.color = tempColor;
-                
+                ActivateObject(m_currentNode, wantedNode);
                 
                 m_currentNode = wantedNode;
             }
+        }
+    }
+
+    private void ActivateObject(PlayerNode previous, PlayerNode newposition)
+    {
+        if (_useImage)
+        {
+            Image tempImage = previous.GetComponent<Image>();
+            var tempColor = tempImage.color;
+            tempColor.a = _opacityDisable;
+            tempImage.color = tempColor;
+
+            tempImage = newposition.GetComponent<Image>();
+            tempColor = tempImage.color;
+            tempColor.a = _opacityActive;
+            tempImage.color = tempColor;
+        }
+        else
+        {
+            Material tempMaterial = previous.GetComponent<MeshRenderer>().material;
+            var tempColor = tempMaterial.color;
+            tempColor.a = _opacityDisable;
+            tempMaterial.color = tempColor;
+
+            tempMaterial = newposition.GetComponent<MeshRenderer>().material;
+            tempColor = tempMaterial.color;
+            tempColor.a = _opacityActive;
+            tempMaterial.color = tempColor;
         }
     }
 }
