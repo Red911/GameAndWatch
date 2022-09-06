@@ -14,9 +14,18 @@ public class PlayerMovementController : MonoBehaviour
 
     private PlayerNode m_currentNode;
 
+    private bool m_hasPatient;
+    private int m_score;
+
     private void Awake()
     {
         m_currentNode = _baseNode;
+        ActivateObject(m_currentNode, m_currentNode);
+    }
+
+    private void Update()
+    {
+        CheckDeath();
     }
 
     public void OnInputMove(InputAction.CallbackContext ctx)
@@ -31,6 +40,16 @@ public class PlayerMovementController : MonoBehaviour
                 ActivateObject(m_currentNode, wantedNode);
                 
                 m_currentNode = wantedNode;
+                if (m_currentNode.IsGoal)
+                {
+                    m_hasPatient = true;
+                }
+                else if (m_currentNode.IsSpawn && m_hasPatient)
+                {
+                    m_hasPatient = false;
+                    m_score++;
+                    Debug.Log($"You save a patient new score : {m_score}");
+                }
             }
         }
     }
@@ -60,6 +79,20 @@ public class PlayerMovementController : MonoBehaviour
             tempColor = tempMaterial.color;
             tempColor.a = _opacityActive;
             tempMaterial.color = tempColor;
+        }
+
+        previous.IsActivated = false;
+        newposition.IsActivated = true;
+    }
+
+    private void CheckDeath()
+    {
+        if (m_currentNode.HasBeenHit)
+        {
+            // Your dead;
+            Debug.Log($"Your died with a score of : {m_score}");
+            ActivateObject(m_currentNode, _baseNode);
+            m_currentNode = _baseNode;
         }
     }
 }
