@@ -1834,6 +1834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameBoard: {fileID: 1718244237}
   columns: 3
+  speed: 1
 --- !u!114 &1497639678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1848,6 +1849,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameBoard: {fileID: 1718244237}
   columns: 2
+  speed: 1
 --- !u!114 &1497639679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1862,6 +1864,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameBoard: {fileID: 1718244237}
   columns: 1
+  speed: 1
 --- !u!114 &1497639680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1876,6 +1879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameBoard: {fileID: 1718244237}
   columns: 0
+  speed: 1
 --- !u!4 &1497639681
 Transform:
   m_ObjectHideFlags: 0
@@ -2574,6 +2578,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameBoard: {fileID: 1718244237}
   columns: 0
+  speed: 10
 --- !u!1 &2054217611
 GameObject:
   m_ObjectHideFlags: 0
