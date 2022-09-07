@@ -9,13 +9,14 @@ public class RandomObjectGenerator : MonoBehaviour
     public int columns = 0;
     private int row = 0;
     public float speed = 10f;
+    [HideInInspector]public int randomTime;
     
 
     IEnumerator Start()
     {
         while (true)
         {
-            int randomTime = Random.Range(0, 6);
+            randomTime = Random.Range(0, 6);
             yield return new WaitForSeconds(randomTime);
             row = 0;
             

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+
 public class PlayerMovementController : MonoBehaviour
 {
     [SerializeField] private PlayerNode _baseNode;
@@ -20,11 +21,16 @@ public class PlayerMovementController : MonoBehaviour
     private bool m_hasPatient;
     private int m_score;
 
+    public int life = 3;
+    public GameObject radomGen;
+    private RandomObjectGenerator[] randomCars;
+
     private void Awake()
     {
         m_currentNode = _baseNode;
         ActivateObject(m_currentNode, m_currentNode);
         UpdateScoreEvent.Raise(m_score);
+        randomCars = radomGen.GetComponents<RandomObjectGenerator>();
     }
 
     private void Update()
@@ -95,12 +101,28 @@ public class PlayerMovementController : MonoBehaviour
         if (m_currentNode.HasBeenHit)
         {
             // Your dead;
+            StartCoroutine(SlowTime());
             Debug.Log($"Your died with a score of : {m_score}");
+            
             ActivateObject(m_currentNode, _baseNode);
             m_score = 0;
             DeathEvent.Raise();
             UpdateScoreEvent.Raise(m_score);
             m_currentNode = _baseNode;
+
         }
     }
+
+    IEnumerator SlowTime()
+    {
+        Time.timeScale = 0.00001f;
+        yield return new WaitForSecondsRealtime(5f);
+        for (int i = 0; i < randomCars.Length; i++)
+        {
+            randomCars[i].gameBoard.Clear();
+        }
+        Time.timeScale = 1f;
+    }
+    
+
 }
