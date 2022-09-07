@@ -22,15 +22,14 @@ public class PlayerMovementController : MonoBehaviour
     private int m_score;
 
     public int life = 3;
-    public GameObject radomGen;
-    private RandomObjectGenerator[] randomCars;
+    public GameBoard gameBoard;
+    private bool isDead;
 
     private void Awake()
     {
         m_currentNode = _baseNode;
         ActivateObject(m_currentNode, m_currentNode);
         UpdateScoreEvent.Raise(m_score);
-        randomCars = radomGen.GetComponents<RandomObjectGenerator>();
     }
 
     private void Update()
@@ -42,7 +41,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         Vector2 movement = ctx.ReadValue<Vector2>();
         
-        if (movement != Vector2.zero && ctx.performed)
+        if (movement != Vector2.zero && ctx.performed && isDead == false)
         {
             PlayerNode wantedNode = m_currentNode.GetPlayerNodeWithMovement(movement);
             if (wantedNode != null)
@@ -100,15 +99,21 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (m_currentNode.HasBeenHit)
         {
+            isDead = true;
             // Your dead;
+            life--;
             StartCoroutine(SlowTime());
             Debug.Log($"Your died with a score of : {m_score}");
             
-            ActivateObject(m_currentNode, _baseNode);
-            m_score = 0;
             DeathEvent.Raise();
-            UpdateScoreEvent.Raise(m_score);
-            m_currentNode = _baseNode;
+            
+            if (life <= 0)
+            {
+                life = 0;
+                m_score = 0;
+                UpdateScoreEvent.Raise(m_score);
+            }
+            
 
         }
     }
@@ -116,12 +121,16 @@ public class PlayerMovementController : MonoBehaviour
     IEnumerator SlowTime()
     {
         Time.timeScale = 0.00001f;
+        gameBoard.Clear();
         yield return new WaitForSecondsRealtime(5f);
-        for (int i = 0; i < randomCars.Length; i++)
-        {
-            randomCars[i].gameBoard.Clear();
-        }
         Time.timeScale = 1f;
+        
+        if (isDead)
+        {
+            ActivateObject(m_currentNode, _baseNode);
+            m_currentNode = _baseNode;
+            isDead = false;
+        }
     }
     
 
