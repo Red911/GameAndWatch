@@ -73,12 +73,4 @@ public class PlayerNode : MonoBehaviour
 
         return null;
     }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        if (IsActivated && other.collider.gameObject.layer == 6)
-        {
-            Debug.Log("Player Hit a car !!!!!");
-        }
-    }
 }

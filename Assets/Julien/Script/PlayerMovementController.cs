@@ -12,6 +12,9 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private float _opacityDisable = .3f;
     [SerializeField] private bool _useImage;
 
+    [SerializeField] private GameEvent DeathEvent;
+    [SerializeField] private GameEventInt UpdateScoreEvent;
+
     private PlayerNode m_currentNode;
 
     private bool m_hasPatient;
@@ -21,6 +24,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         m_currentNode = _baseNode;
         ActivateObject(m_currentNode, m_currentNode);
+        UpdateScoreEvent.Raise(m_score);
     }
 
     private void Update()
@@ -48,6 +52,7 @@ public class PlayerMovementController : MonoBehaviour
                 {
                     m_hasPatient = false;
                     m_score++;
+                    UpdateScoreEvent.Raise(m_score);
                     Debug.Log($"You save a patient new score : {m_score}");
                 }
             }
@@ -92,6 +97,9 @@ public class PlayerMovementController : MonoBehaviour
             // Your dead;
             Debug.Log($"Your died with a score of : {m_score}");
             ActivateObject(m_currentNode, _baseNode);
+            m_score = 0;
+            DeathEvent.Raise();
+            UpdateScoreEvent.Raise(m_score);
             m_currentNode = _baseNode;
         }
     }
