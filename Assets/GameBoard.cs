@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameBoard : MonoBehaviour
 {
-    bool[,] grid = new bool[4, 3];
+    
+    public bool[,] grid = new bool[4, 3];
 
     public bool GetValueAt(int x, int y)
     {

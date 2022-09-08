@@ -107,7 +107,9 @@ public class PlayerMovementController : MonoBehaviour
         if (m_currentNode.HasBeenHit)
         {
             isDead = true;
+            audio.playerAudio.volume = 1f;
             audio.playerAudio.PlayOneShot(audio.hit);
+            
             // Your dead;
             life--;
             StartCoroutine(SlowTime());
