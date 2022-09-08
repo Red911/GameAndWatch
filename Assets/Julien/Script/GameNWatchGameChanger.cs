@@ -13,6 +13,7 @@ public class GameNWatchGameChanger : MonoBehaviour
 
     public void SwitchGame(int game)
     {
+        StopAllCoroutines();
         Screen.material = Games[game];
         v2.SetActive(true);
         GameScene[currentGame].SetActive(false);

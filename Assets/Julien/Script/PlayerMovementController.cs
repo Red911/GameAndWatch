@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
 public class PlayerMovementController : MonoBehaviour
 {
+    [SerializeField] private int _gameIndex = 1;
+    
     [SerializeField] private PlayerNode _baseNode;
     [SerializeField] private float _opacityActive = 1f;
     [SerializeField] private float _opacityDisable = .3f;
@@ -37,8 +40,15 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Update()
     {
-        CheckHasWinGame1();
-        CheckDeathGame1();
+        if (_gameIndex == 1)
+        {
+            CheckHasWinGame1();
+            CheckDeathGame1();
+        }
+        else if (_gameIndex == 2)
+        {
+            CheckDeathGame2();
+        }
     }
 
     public void OnInputMove(InputAction.CallbackContext ctx)
@@ -54,20 +64,24 @@ public class PlayerMovementController : MonoBehaviour
                 ActivateObject(m_currentNode, wantedNode);
                 
                 m_currentNode = wantedNode;
-                if (m_currentNode.IsGoal)
+
+                if (_gameIndex == 1)
                 {
-                    audio.playerAudio.PlayOneShot(audio.getPatient);
-                    m_hasPatient = true;
-                    _Patient.SetActive(false);
-                }
-                else if (m_currentNode.IsSpawn && m_hasPatient)
-                {
-                    
-                    m_hasPatient = false;
-                    _Patient.SetActive(true);
-                    m_score++;
-                    UpdateScoreEvent.Raise(m_score);
-                    Debug.Log($"You save a patient new score : {m_score}");
+                    if (m_currentNode.IsGoal)
+                    {
+                        audio.playerAudio.PlayOneShot(audio.getPatient);
+                        m_hasPatient = true;
+                        _Patient.SetActive(false);
+                    }
+                    else if (m_currentNode.IsSpawn && m_hasPatient)
+                    {
+
+                        m_hasPatient = false;
+                        _Patient.SetActive(true);
+                        m_score++;
+                        UpdateScoreEvent.Raise(m_score);
+                        Debug.Log($"You save a patient new score : {m_score}");
+                    }
                 }
             }
         }
@@ -102,6 +116,31 @@ public class PlayerMovementController : MonoBehaviour
 
         previous.IsActivated = false;
         newposition.IsActivated = true;
+    }
+    
+    private void CheckDeathGame2()
+    {
+        if (m_currentNode.HasBeenHit)
+        {
+            isDead = true;
+            audio.playerAudio.volume = 1f;
+            audio.playerAudio.PlayOneShot(audio.hit);
+            
+            // Your dead;
+            life--;
+            StartCoroutine(SlowTime());
+            UpdateScoreEvent.Raise(life);
+            
+            DeathEvent.Raise(2);
+            
+            if (life <= 0)
+            {
+                // Lose game
+                SceneManager.LoadScene(0);
+            }
+            
+
+        }
     }
 
     private void CheckDeathGame1()

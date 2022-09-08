@@ -43,7 +43,8 @@ public class Display : MonoBehaviour
             {
                 for (int x = 0; x < 4; x++)
                 {
-                    grid[x,y].SetActive(gameBoard.GetValueAt(x,y));
+                    if (grid[x, y] != null)
+                        grid[x,y].SetActive(gameBoard.GetValueAt(x,y));
                 }
             }
             yield return null;
