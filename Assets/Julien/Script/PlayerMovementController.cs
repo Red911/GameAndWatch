@@ -26,6 +26,7 @@ public class PlayerMovementController : MonoBehaviour
     public GameBoard gameBoard;
     private bool isDead;
 
+    public AudioManager audio;
     private void Awake()
     {
         m_currentNode = _baseNode;
@@ -44,6 +45,7 @@ public class PlayerMovementController : MonoBehaviour
         
         if (movement != Vector2.zero && ctx.performed && isDead == false)
         {
+            audio.playerAudio.PlayOneShot(audio.movement);
             PlayerNode wantedNode = m_currentNode.GetPlayerNodeWithMovement(movement);
             if (wantedNode != null)
             {
@@ -52,11 +54,13 @@ public class PlayerMovementController : MonoBehaviour
                 m_currentNode = wantedNode;
                 if (m_currentNode.IsGoal)
                 {
+                    audio.playerAudio.PlayOneShot(audio.getPatient);
                     m_hasPatient = true;
                     _Patient.SetActive(false);
                 }
                 else if (m_currentNode.IsSpawn && m_hasPatient)
                 {
+                    
                     m_hasPatient = false;
                     _Patient.SetActive(true);
                     m_score++;
@@ -103,6 +107,7 @@ public class PlayerMovementController : MonoBehaviour
         if (m_currentNode.HasBeenHit)
         {
             isDead = true;
+            audio.playerAudio.PlayOneShot(audio.hit);
             // Your dead;
             life--;
             StartCoroutine(SlowTime());
