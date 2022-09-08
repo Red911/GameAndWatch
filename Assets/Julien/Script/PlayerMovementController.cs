@@ -15,6 +15,7 @@ public class PlayerMovementController : MonoBehaviour
 
     [SerializeField] private GameEvent DeathEvent;
     [SerializeField] private GameEventInt UpdateScoreEvent;
+    [SerializeField] private GameObject _Patient;
 
     private PlayerNode m_currentNode;
 
@@ -52,10 +53,12 @@ public class PlayerMovementController : MonoBehaviour
                 if (m_currentNode.IsGoal)
                 {
                     m_hasPatient = true;
+                    _Patient.SetActive(false);
                 }
                 else if (m_currentNode.IsSpawn && m_hasPatient)
                 {
                     m_hasPatient = false;
+                    _Patient.SetActive(true);
                     m_score++;
                     UpdateScoreEvent.Raise(m_score);
                     Debug.Log($"You save a patient new score : {m_score}");
@@ -106,6 +109,8 @@ public class PlayerMovementController : MonoBehaviour
             Debug.Log($"Your died with a score of : {m_score}");
             
             DeathEvent.Raise();
+            m_hasPatient = false;
+            _Patient.SetActive(true);
             
             if (life <= 0)
             {
