@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+
 public class PlayerMovementController : MonoBehaviour
 {
     [SerializeField] private PlayerNode _baseNode;
@@ -19,6 +20,10 @@ public class PlayerMovementController : MonoBehaviour
 
     private bool m_hasPatient;
     private int m_score;
+
+    public int life = 3;
+    public GameBoard gameBoard;
+    private bool isDead;
 
     private void Awake()
     {
@@ -36,7 +41,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         Vector2 movement = ctx.ReadValue<Vector2>();
         
-        if (movement != Vector2.zero && ctx.performed)
+        if (movement != Vector2.zero && ctx.performed && isDead == false)
         {
             PlayerNode wantedNode = m_currentNode.GetPlayerNodeWithMovement(movement);
             if (wantedNode != null)
@@ -94,13 +99,39 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (m_currentNode.HasBeenHit)
         {
+            isDead = true;
             // Your dead;
+            life--;
+            StartCoroutine(SlowTime());
             Debug.Log($"Your died with a score of : {m_score}");
-            ActivateObject(m_currentNode, _baseNode);
-            m_score = 0;
+            
             DeathEvent.Raise();
-            UpdateScoreEvent.Raise(m_score);
-            m_currentNode = _baseNode;
+            
+            if (life <= 0)
+            {
+                life = 0;
+                m_score = 0;
+                UpdateScoreEvent.Raise(m_score);
+            }
+            
+
         }
     }
+
+    IEnumerator SlowTime()
+    {
+        Time.timeScale = 0.00001f;
+        gameBoard.Clear();
+        yield return new WaitForSecondsRealtime(5f);
+        Time.timeScale = 1f;
+        
+        if (isDead)
+        {
+            ActivateObject(m_currentNode, _baseNode);
+            m_currentNode = _baseNode;
+            isDead = false;
+        }
+    }
+    
+
 }
