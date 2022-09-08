@@ -13,7 +13,8 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private float _opacityDisable = .3f;
     [SerializeField] private bool _useImage;
 
-    [SerializeField] private GameEvent DeathEvent;
+    [SerializeField] private GameEventInt DeathEvent;
+    [SerializeField] private GameEventInt WinEvent;
     [SerializeField] private GameEventInt UpdateScoreEvent;
     [SerializeField] private GameObject _Patient;
 
@@ -36,7 +37,8 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Update()
     {
-        CheckDeath();
+        CheckHasWinGame1();
+        CheckDeathGame1();
     }
 
     public void OnInputMove(InputAction.CallbackContext ctx)
@@ -102,7 +104,7 @@ public class PlayerMovementController : MonoBehaviour
         newposition.IsActivated = true;
     }
 
-    private void CheckDeath()
+    private void CheckDeathGame1()
     {
         if (m_currentNode.HasBeenHit)
         {
@@ -113,7 +115,7 @@ public class PlayerMovementController : MonoBehaviour
             StartCoroutine(SlowTime());
             Debug.Log($"Your died with a score of : {m_score}");
             
-            DeathEvent.Raise();
+            DeathEvent.Raise(1);
             m_hasPatient = false;
             _Patient.SetActive(true);
             
@@ -125,6 +127,14 @@ public class PlayerMovementController : MonoBehaviour
             }
             
 
+        }
+    }
+
+    public void CheckHasWinGame1()
+    {
+        if (m_score == 2)
+        {
+            WinEvent.Raise(1);
         }
     }
 

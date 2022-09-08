@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Display : MonoBehaviour
 {
-    private GameObject[,] grid = new GameObject[4, 3];
+    private GameObject[,] grid = new GameObject[4, 4];
     
     
     [Tooltip("la table de jeu qui quel objet sont affiché")]
@@ -39,7 +39,7 @@ public class Display : MonoBehaviour
     {
         while(true)
         {
-            for (int y = 0; y < 3; y++)
+            for (int y = 0; y < 4; y++)
             {
                 for (int x = 0; x < 4; x++)
                 {
