@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Display : MonoBehaviour
 {
-    private GameObject[,] grid = new GameObject[4, 4];
+    private GameObject[,] grid = new GameObject[5, 4];
     
     
     [Tooltip("la table de jeu qui quel objet sont affiché")]
@@ -41,7 +41,7 @@ public class Display : MonoBehaviour
         {
             for (int y = 0; y < 4; y++)
             {
-                for (int x = 0; x < 4; x++)
+                for (int x = 0; x < 5; x++)
                 {
                     if (grid[x, y] != null)
                         grid[x,y].SetActive(gameBoard.GetValueAt(x,y));
