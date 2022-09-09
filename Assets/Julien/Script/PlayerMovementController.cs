@@ -150,6 +150,7 @@ public class PlayerMovementController : MonoBehaviour
             isDead = true;
             audio.playerAudio.volume = 1f;
             audio.playerAudio.PlayOneShot(audio.hit);
+            audio.playerAudio.volume = 0.5f;
             
             // Your dead;
             life--;
@@ -165,6 +166,7 @@ public class PlayerMovementController : MonoBehaviour
                 life = 0;
                 m_score = 0;
                 UpdateScoreEvent.Raise(m_score);
+                SceneManager.LoadScene(0);
             }
             
 
@@ -173,8 +175,9 @@ public class PlayerMovementController : MonoBehaviour
 
     public void CheckHasWinGame1()
     {
-        if (m_score == 2)
+        if (m_score == 4)
         {
+            audio.playerAudio.PlayOneShot(audio.victory);
             WinEvent.Raise(1);
         }
     }

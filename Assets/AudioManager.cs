@@ -5,7 +5,6 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public AudioSource playerAudio;
-    public AudioSource environementAudio;
 
     public AudioClip hit;
     public AudioClip movement;
@@ -16,8 +15,7 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         playerAudio = gameObject.AddComponent<AudioSource>();
-        environementAudio = gameObject.AddComponent<AudioSource>();
         playerAudio.volume = 0.5f;
-        environementAudio.volume = 0.5f;
+        
     }
 }
