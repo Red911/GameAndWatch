@@ -558,7 +558,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &395484581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,11 +617,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba6a31c225c43e84881f4db419d04f76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseNode: {fileID: 0}
+  _gameIndex: 2
+  _baseNode: {fileID: 1872417930}
   _opacityActive: 1
   _opacityDisable: 0.1
   _useImage: 0
   DeathEvent: {fileID: 11400000, guid: c9fddec30b0525f44b3dcfac692392f8, type: 2}
+  WinEvent: {fileID: 0}
   UpdateScoreEvent: {fileID: 11400000, guid: 0dd1213e733039342b9bcbcf256a421b, type: 2}
   _Patient: {fileID: 0}
   life: 3

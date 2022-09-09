@@ -31,7 +31,7 @@ public class RandomObjectGenerator : MonoBehaviour
                 row++;
                 
             }
-            while (row <= 2) ;
+            while (row <= 3) ;
 
 
         }
