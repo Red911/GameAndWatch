@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class GameBoard : MonoBehaviour
 {
-    
-    public bool[,] grid = new bool[4, 3];
+    bool[,] grid = new bool[5, 4];
 
     public bool GetValueAt(int x, int y)
     {
@@ -19,9 +18,9 @@ public class GameBoard : MonoBehaviour
 
     public void Clear()
     {
-        for (int y = 0; y < 3; y++)
+        for (int y = 0; y < 4; y++)
         {
-            for (int x = 0; x < 4; x++)
+            for (int x = 0; x < 5; x++)
             {
                 grid[x, y] = false;
             }
