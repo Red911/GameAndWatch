@@ -2491,10 +2491,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAudio: {fileID: 1050088483}
+  enviromentAudio: {fileID: 0}
   hit: {fileID: 8300000, guid: 48eb3ef337c660b46a91caa5fcda33c1, type: 3}
   movement: {fileID: 8300000, guid: 790ee691e22f05a469f786ffaeac96db, type: 3}
   getPatient: {fileID: 8300000, guid: c3fbc246dc1689f48b9a9b26e614a52f, type: 3}
   victory: {fileID: 8300000, guid: 11e36ef21e155fb41bc61dec39deb9c6, type: 3}
+  carDriving: {fileID: 8300000, guid: ee2581656331cf9468458e7f9669d34e, type: 3}
 --- !u!82 &395484585
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7538,6 +7540,102 @@ MonoBehaviour:
   GameScene:
   - {fileID: 1298670400}
   - {fileID: 315738179}
+--- !u!82 &1212832250
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212832242}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 0c64c66073b420a43bf4d4213b93df25, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.7
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1220560559
 GameObject:
   m_ObjectHideFlags: 0
@@ -8076,10 +8174,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAudio: {fileID: 0}
+  enviromentAudio: {fileID: 0}
   hit: {fileID: 8300000, guid: 72e16277e26c311438c12c414f7d9c77, type: 3}
   movement: {fileID: 8300000, guid: 790ee691e22f05a469f786ffaeac96db, type: 3}
   getPatient: {fileID: 8300000, guid: c3fbc246dc1689f48b9a9b26e614a52f, type: 3}
   victory: {fileID: 8300000, guid: 11e36ef21e155fb41bc61dec39deb9c6, type: 3}
+  carDriving: {fileID: 8300000, guid: ee2581656331cf9468458e7f9669d34e, type: 3}
 --- !u!114 &1359563450
 MonoBehaviour:
   m_ObjectHideFlags: 0

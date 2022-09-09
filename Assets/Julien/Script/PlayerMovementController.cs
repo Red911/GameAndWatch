@@ -30,7 +30,7 @@ public class PlayerMovementController : MonoBehaviour
     public GameBoard gameBoard;
     private bool isDead;
 
-    public AudioManager audio;
+    public new AudioManager audio;
     private void Awake()
     {
         m_currentNode = _baseNode;
