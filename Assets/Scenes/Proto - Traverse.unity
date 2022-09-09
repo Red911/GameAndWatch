@@ -2497,6 +2497,7 @@ MonoBehaviour:
   getPatient: {fileID: 8300000, guid: c3fbc246dc1689f48b9a9b26e614a52f, type: 3}
   victory: {fileID: 8300000, guid: 11e36ef21e155fb41bc61dec39deb9c6, type: 3}
   carDriving: {fileID: 8300000, guid: ee2581656331cf9468458e7f9669d34e, type: 3}
+  birdsSounds: {fileID: 8300000, guid: 336510c007a68114ea3d6a17a313717e, type: 3}
 --- !u!82 &395484585
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8180,6 +8181,7 @@ MonoBehaviour:
   getPatient: {fileID: 8300000, guid: c3fbc246dc1689f48b9a9b26e614a52f, type: 3}
   victory: {fileID: 8300000, guid: 11e36ef21e155fb41bc61dec39deb9c6, type: 3}
   carDriving: {fileID: 8300000, guid: ee2581656331cf9468458e7f9669d34e, type: 3}
+  birdsSounds: {fileID: 8300000, guid: 0c64c66073b420a43bf4d4213b93df25, type: 3}
 --- !u!114 &1359563450
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("Evironement Music")] 
     public AudioClip carDriving;
+    public AudioClip birdsSounds;
     
     
     void Start()

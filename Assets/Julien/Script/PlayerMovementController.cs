@@ -42,11 +42,15 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (_gameIndex == 1)
         {
+            audio.enviromentAudio.clip = audio.birdsSounds;
+            audio.enviromentAudio.loop = true;
             CheckHasWinGame1();
             CheckDeathGame1();
         }
         else if (_gameIndex == 2)
         {
+            audio.enviromentAudio.clip = audio.carDriving;
+            audio.enviromentAudio.loop = true;
             CheckDeathGame2();
         }
     }
@@ -177,7 +181,10 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (m_score == 4)
         {
-            audio.playerAudio.PlayOneShot(audio.victory);
+            audio.playerAudio.volume = 0.25f;
+            audio.playerAudio.clip = audio.victory;
+            audio.playerAudio.Play();
+            audio.playerAudio.volume = 0.5f;
             WinEvent.Raise(1);
         }
     }
@@ -186,7 +193,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         Time.timeScale = 0.00001f;
         gameBoard.Clear();
-        yield return new WaitForSecondsRealtime(5f);
+        yield return new WaitForSecondsRealtime(2f);
         Time.timeScale = 1f;
         
         if (isDead)
