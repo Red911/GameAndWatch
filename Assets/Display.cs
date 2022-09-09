@@ -44,7 +44,13 @@ public class Display : MonoBehaviour
                 for (int x = 0; x < 5; x++)
                 {
                     if (grid[x, y] != null)
-                        grid[x,y].SetActive(gameBoard.GetValueAt(x,y));
+                    {
+                        // grid[x, y].SetActive(gameBoard.GetValueAt(x, y));
+                        // Debug.Log(grid[x, y].GetComponent<MeshRenderer>().material.name);
+                        Material mat = grid[x, y].GetComponent<MeshRenderer>().material;
+                        mat.color = new Color(mat.color.r, mat.color.g, mat.color.b, gameBoard.GetValueAt(x, y) ? 1f : .3f);
+                        // grid[x, y].GetComponent<MeshRenderer>().material = mat;
+                    }
                 }
             }
             yield return null;

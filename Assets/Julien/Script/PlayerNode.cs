@@ -25,7 +25,7 @@ public class PlayerNode : MonoBehaviour
 
     public bool HasBeenHit
     {
-        get => _deathDetection != null && _deathDetection.activeSelf;
+        get => _deathDetection != null && _deathDetection.GetComponent<MeshRenderer>().material.color.a == 1f;
     }
 
     public bool IsGoal

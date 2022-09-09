@@ -19,7 +19,10 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private GameEventInt DeathEvent;
     [SerializeField] private GameEventInt WinEvent;
     [SerializeField] private GameEventInt UpdateScoreEvent;
+    [SerializeField] private GameEventInt UpdateTimerEvent;
     [SerializeField] private GameObject _Patient;
+    
+    [SerializeField] private float _TimerInSecond;
 
     private PlayerNode m_currentNode;
 
@@ -30,12 +33,19 @@ public class PlayerMovementController : MonoBehaviour
     public GameBoard gameBoard;
     private bool isDead;
 
-    public new AudioManager audio;
+    private float _timer;
+
+    public AudioManager audio;
     private void Awake()
     {
         m_currentNode = _baseNode;
         ActivateObject(m_currentNode, m_currentNode);
         UpdateScoreEvent.Raise(m_score);
+        if (_gameIndex == 2)
+        {
+            _timer = _TimerInSecond;
+            UpdateTimerEvent.Raise(Mathf.RoundToInt(_timer));
+        }
     }
 
     private void Update()
@@ -52,6 +62,15 @@ public class PlayerMovementController : MonoBehaviour
             audio.enviromentAudio.clip = audio.carDriving;
             audio.enviromentAudio.loop = true;
             CheckDeathGame2();
+            _timer -= Time.deltaTime;
+            UpdateTimerEvent.Raise(Mathf.RoundToInt(_timer));
+
+            if (_timer <= 0)
+            {
+                // Win
+                Debug.Log("Victoire !!!!!!!");
+                WinEvent.Raise(2);
+            }
         }
     }
 
@@ -95,12 +114,12 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (_useImage)
         {
-            Image tempImage = previous.GetComponent<Image>();
+            SpriteRenderer tempImage = previous.GetComponent<SpriteRenderer>();
             var tempColor = tempImage.color;
             tempColor.a = _opacityDisable;
             tempImage.color = tempColor;
 
-            tempImage = newposition.GetComponent<Image>();
+            tempImage = newposition.GetComponent<SpriteRenderer>();
             tempColor = tempImage.color;
             tempColor.a = _opacityActive;
             tempImage.color = tempColor;
@@ -136,13 +155,7 @@ public class PlayerMovementController : MonoBehaviour
             UpdateScoreEvent.Raise(life);
             
             DeathEvent.Raise(2);
-            
-            if (life <= 0)
-            {
-                // Lose game
-                SceneManager.LoadScene(0);
-            }
-            
+
 
         }
     }
@@ -164,15 +177,7 @@ public class PlayerMovementController : MonoBehaviour
             DeathEvent.Raise(1);
             m_hasPatient = false;
             _Patient.SetActive(true);
-            
-            if (life <= 0)
-            {
-                life = 0;
-                m_score = 0;
-                UpdateScoreEvent.Raise(m_score);
-                SceneManager.LoadScene(0);
-            }
-            
+
 
         }
     }
@@ -202,6 +207,28 @@ public class PlayerMovementController : MonoBehaviour
             m_currentNode = _baseNode;
             isDead = false;
         }
+
+
+        if (_gameIndex == 1)
+        {
+            if (life <= 0)
+            {
+                life = 0;
+                m_score = 0;
+                UpdateScoreEvent.Raise(m_score);
+                SceneManager.LoadScene(0);
+            }
+        }
+        else if (_gameIndex == 2)
+        {
+            if (life <= 0)
+            {
+                // Lose game
+                SceneManager.LoadScene(0);
+            }
+        }
+        
+        
     }
     
 
