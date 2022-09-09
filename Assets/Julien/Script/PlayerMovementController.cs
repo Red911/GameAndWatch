@@ -70,6 +70,7 @@ public class PlayerMovementController : MonoBehaviour
                 // Win
                 Debug.Log("Victoire !!!!!!!");
                 WinEvent.Raise(2);
+                SceneManager.LoadScene(2);
             }
         }
     }
